@@ -1,23 +1,32 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/typography'),
-    ],
-  }
-  ```
-*/
 import { useState } from 'react'
 import { StarIcon } from '@heroicons/react/solid'
 import { RadioGroup } from '@headlessui/react'
 import { CurrencyDollarIcon, GlobeIcon } from '@heroicons/react/outline'
+
+type LoaderData = {
+  listableProductList: ListableProduct[];
+};
+
+type ListableProduct = {
+  id: string;
+  imgUrl: string;
+  imgAlt: string;
+  description: string;
+  model: string;
+  color: string;
+  price: number;
+};
+
+type Product = {
+  id: string;
+  model: string;
+  imageUrl: string;
+  description: string;
+  color: string;
+  size: string;
+  price: number;
+  createdAt: Date;
+};
 
 const product = {
   name: 'Basic Tee',
@@ -26,8 +35,8 @@ const product = {
   reviewCount: 512,
   href: '#',
   breadcrumbs: [
-    { id: 1, name: 'Women', href: '#' },
-    { id: 2, name: 'Clothing', href: '#' },
+    { id: 1, name: 'Home', href: '/homepage' },
+    { id: 2, name: 'Detail', href: '/details/accessories-detail' },
   ],
   images: [
     {

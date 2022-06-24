@@ -16,6 +16,7 @@ const navigation = {
     { name: "Products", href: "/products" },
   ],
 };
+
 const categories = [
   {
     name: "New Arrivals",
@@ -51,17 +52,12 @@ const categories = [
 
 const footerNavigation = {
   shop: [
-    { name: "Bags", href: "#" },
-    { name: "Tees", href: "#" },
-    { name: "Objects", href: "#" },
-    { name: "Home Goods", href: "#" },
+    { name: "Bracelets", href: "#" },
     { name: "Accessories", href: "#" },
   ],
   company: [
     { name: "Who we are", href: "#" },
     { name: "Sustainability", href: "#" },
-    { name: "Press", href: "#" },
-    { name: "Careers", href: "#" },
     { name: "Terms & Conditions", href: "#" },
     { name: "Privacy", href: "#" },
   ],

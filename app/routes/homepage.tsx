@@ -1,14 +1,13 @@
-import { Fragment, useState } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   MenuIcon,
-  QuestionMarkCircleIcon,
   SearchIcon,
   ShoppingBagIcon,
   XIcon,
 } from "@heroicons/react/outline";
 import { Link } from "@remix-run/react";
 import serenuplogo from "public/assets/seren-up-logo.png";
+import { Fragment, useState } from "react";
 
 const navigation = {
   pages: [
@@ -144,16 +143,10 @@ export default function Homepage() {
 
                 <div className="flex items-center space-x-6">
                   <Link
-                    to="/registration"
+                    to="/signin"
                     className="text-sm font-medium text-white hover:text-gray-100"
                   >
-                    Sign up
-                  </Link>
-                  <Link
-                    to="/login"
-                    className="text-sm font-medium text-white hover:text-gray-100"
-                  >
-                    Sign in
+                    Sign In
                   </Link>
                 </div>
               </div>
@@ -362,7 +355,7 @@ export default function Homepage() {
             </div>
           </div>
 
-            {/*references to seren-up and Systax */}
+          {/*references to seren-up and Systax */}
           <div className="border-t border-gray-800 py-10">
             <p className="text-sm text-gray-400">
               Copyright &copy; 2022 Seren-Up S.p.A. - Made By Systax

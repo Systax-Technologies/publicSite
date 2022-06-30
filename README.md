@@ -2,22 +2,22 @@
 
 ## Public website
 
-###General Info
+### General Info
 
 front-end: Remix, Reactjs, Tailwind
 
-###This project is created using:
+### This project is created using:
     
     Actions:  used for making POST requests
     Loaders:  used for making GET requests
     UseState: used to differentiate behaviours in the same page
     
 
-###Future Features
+### Future Features
     Contact us page
     Recommended products
     
-##Screenshots
+## Screenshots
 Homepage
 ![image](https://user-images.githubusercontent.com/75695917/176617221-c6ffb9f2-7943-4ff1-ba21-40fbcac2e0cc.png)
 ![image](https://user-images.githubusercontent.com/75695917/176617221-c6ffb9f2-7943-4ff1-ba21-40fbcac2e0cc.png)

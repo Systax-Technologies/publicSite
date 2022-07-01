@@ -124,9 +124,10 @@ export default function Products() {
   const { listableProductList } = useLoaderData<LoaderData>();
   return (
     <div className="bg-gradient-to-b from-orange-50 to-white">
-
-<main className="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-      <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Products</h1>
+      <main className="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Products
+        </h1>
 
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {listableProductList.map((product) => (
@@ -155,8 +156,7 @@ export default function Products() {
             </div>
           ))}
         </div>
-</main>
-
+      </main>
     </div>
   );
 }

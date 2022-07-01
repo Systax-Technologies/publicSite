@@ -11,9 +11,7 @@ import bracelets from "public/assets/bracelets.jpg";
 import { Fragment, useState } from "react";
 
 const footerNavigation = {
-  shop: [
-    { name: "Bracelets", href: "/products" },
-  ],
+  shop: [{ name: "Bracelets", href: "/products" }],
   company: [
     { name: "Who we are", href: "#" },
     { name: "Terms & Conditions", href: "#" },
@@ -29,7 +27,6 @@ export default function Homepage() {
   return (
     <div className="bg-white">
       {/* Mobile menu */}
-
 
       {/* Hero section */}
       <div className="relative bg-orange-700">
@@ -47,9 +44,7 @@ export default function Homepage() {
         />
 
         {/* Navigation */}
-        <header className="relative z-10">
-
-        </header>
+        <header className="relative z-10"></header>
 
         <div className="relative max-w-3xl mx-auto py-32 px-6 flex flex-col items-center text-center sm:py-64 lg:px-0">
           <h1 className="text-4xl font-extrabold tracking-tight text-white lg:text-6xl drop-shadow-2xl shadow-zinc-500">

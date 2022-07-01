@@ -203,7 +203,7 @@ function Register({ setCurrentForm }: RegisterProps) {
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <Form className="space-y-6" action="#" method="post">
-            <div className="flex flex-row columns-2 justify-between">
+              <div className="flex flex-row columns-2 justify-between">
                 <div className=" col-span-1 m-1">
                   <label
                     htmlFor="text"
@@ -296,7 +296,6 @@ function Register({ setCurrentForm }: RegisterProps) {
                   />
                 </div>
               </div>
-
 
               <div className="flex items-center justify-between">
                 <div className="text-sm">

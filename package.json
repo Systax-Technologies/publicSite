@@ -8,7 +8,8 @@
     "build": "npm run build:remix && npm run build:tailwind",
     "build:css": "tailwindcss -o ./app/styles.css",
     "build:remix": "NODE_ENV=development remix build",
-    "start": "remix-serve build"
+    "start": "remix-serve build",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@remix-run/node": "^1.6.0",

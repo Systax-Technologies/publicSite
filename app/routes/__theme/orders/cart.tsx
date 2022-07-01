@@ -1,223 +1,243 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
-import { MenuIcon, SearchIcon, ShoppingBagIcon, XIcon as XIconOutline } from '@heroicons/react/outline'
-import { CheckIcon, ClockIcon, QuestionMarkCircleIcon, XIcon as XIconSolid } from '@heroicons/react/solid'
-import { Link } from '@remix-run/react'
+import { Fragment, useState } from "react";
+import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
+import {
+  MenuIcon,
+  SearchIcon,
+  ShoppingBagIcon,
+  XIcon as XIconOutline,
+} from "@heroicons/react/outline";
+import {
+  CheckIcon,
+  ClockIcon,
+  QuestionMarkCircleIcon,
+  XIcon as XIconSolid,
+} from "@heroicons/react/solid";
+import { Link } from "@remix-run/react";
 
 const navigation = {
   categories: [
     {
-      id: 'women',
-      name: 'Women',
+      id: "women",
+      name: "Women",
       featured: [
         {
-          name: 'New Arrivals',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
-          imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
+          name: "New Arrivals",
+          href: "#",
+          imageSrc:
+            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
+          imageAlt:
+            "Models sitting back to back, wearing Basic Tee in black and bone.",
         },
         {
-          name: 'Basic Tees',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
-          imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
+          name: "Basic Tees",
+          href: "#",
+          imageSrc:
+            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg",
+          imageAlt:
+            "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
         },
       ],
       sections: [
         {
-          id: 'clothing',
-          name: 'Clothing',
+          id: "clothing",
+          name: "Clothing",
           items: [
-            { name: 'Tops', href: '#' },
-            { name: 'Dresses', href: '#' },
-            { name: 'Pants', href: '#' },
-            { name: 'Denim', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' },
+            { name: "Tops", href: "#" },
+            { name: "Dresses", href: "#" },
+            { name: "Pants", href: "#" },
+            { name: "Denim", href: "#" },
+            { name: "Sweaters", href: "#" },
+            { name: "T-Shirts", href: "#" },
+            { name: "Jackets", href: "#" },
+            { name: "Activewear", href: "#" },
+            { name: "Browse All", href: "#" },
           ],
         },
         {
-          id: 'accessories',
-          name: 'Accessories',
+          id: "accessories",
+          name: "Accessories",
           items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
-            { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Belts', href: '#' },
+            { name: "Watches", href: "#" },
+            { name: "Wallets", href: "#" },
+            { name: "Bags", href: "#" },
+            { name: "Sunglasses", href: "#" },
+            { name: "Hats", href: "#" },
+            { name: "Belts", href: "#" },
           ],
         },
         {
-          id: 'brands',
-          name: 'Brands',
+          id: "brands",
+          name: "Brands",
           items: [
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Significant Other', href: '#' },
+            { name: "Full Nelson", href: "#" },
+            { name: "My Way", href: "#" },
+            { name: "Re-Arranged", href: "#" },
+            { name: "Counterfeit", href: "#" },
+            { name: "Significant Other", href: "#" },
           ],
         },
       ],
     },
     {
-      id: 'men',
-      name: 'Men',
+      id: "men",
+      name: "Men",
       featured: [
         {
-          name: 'New Arrivals',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
-          imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
+          name: "New Arrivals",
+          href: "#",
+          imageSrc:
+            "https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg",
+          imageAlt:
+            "Drawstring top with elastic loop closure and textured interior padding.",
         },
         {
-          name: 'Artwork Tees',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
+          name: "Artwork Tees",
+          href: "#",
+          imageSrc:
+            "https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg",
           imageAlt:
-            'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
+            "Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.",
         },
       ],
       sections: [
         {
-          id: 'clothing',
-          name: 'Clothing',
+          id: "clothing",
+          name: "Clothing",
           items: [
-            { name: 'Tops', href: '#' },
-            { name: 'Pants', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' },
+            { name: "Tops", href: "#" },
+            { name: "Pants", href: "#" },
+            { name: "Sweaters", href: "#" },
+            { name: "T-Shirts", href: "#" },
+            { name: "Jackets", href: "#" },
+            { name: "Activewear", href: "#" },
+            { name: "Browse All", href: "#" },
           ],
         },
         {
-          id: 'accessories',
-          name: 'Accessories',
+          id: "accessories",
+          name: "Accessories",
           items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
-            { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Belts', href: '#' },
+            { name: "Watches", href: "#" },
+            { name: "Wallets", href: "#" },
+            { name: "Bags", href: "#" },
+            { name: "Sunglasses", href: "#" },
+            { name: "Hats", href: "#" },
+            { name: "Belts", href: "#" },
           ],
         },
         {
-          id: 'brands',
-          name: 'Brands',
+          id: "brands",
+          name: "Brands",
           items: [
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
+            { name: "Re-Arranged", href: "#" },
+            { name: "Counterfeit", href: "#" },
+            { name: "Full Nelson", href: "#" },
+            { name: "My Way", href: "#" },
           ],
         },
       ],
     },
   ],
   pages: [
-    { name: 'Company', href: '#' },
-    { name: 'Stores', href: '#' },
+    { name: "Company", href: "#" },
+    { name: "Stores", href: "#" },
   ],
-}
+};
 const products = [
   {
     id: 1,
-    name: 'Basic Tee',
-    href: '#',
-    price: '$32.00',
-    color: 'Sienna',
+    name: "Basic Tee",
+    href: "#",
+    price: "$32.00",
+    color: "Sienna",
     inStock: true,
-    size: 'Large',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-01.jpg',
+    size: "Large",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-01.jpg",
     imageAlt: "Front of men's Basic Tee in sienna.",
   },
   {
     id: 2,
-    name: 'Basic Tee',
-    href: '#',
-    price: '$32.00',
-    color: 'Black',
+    name: "Basic Tee",
+    href: "#",
+    price: "$32.00",
+    color: "Black",
     inStock: false,
-    leadTime: '3–4 weeks',
-    size: 'Large',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-02.jpg',
+    leadTime: "3–4 weeks",
+    size: "Large",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-02.jpg",
     imageAlt: "Front of men's Basic Tee in black.",
   },
   {
     id: 3,
-    name: 'Nomad Tumbler',
-    href: '#',
-    price: '$35.00',
-    color: 'White',
+    name: "Nomad Tumbler",
+    href: "#",
+    price: "$35.00",
+    color: "White",
     inStock: true,
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-03.jpg',
-    imageAlt: 'Insulated bottle with white base and black snap lid.',
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-03.jpg",
+    imageAlt: "Insulated bottle with white base and black snap lid.",
   },
-]
+];
 const relatedProducts = [
   {
     id: 1,
-    name: 'Billfold Wallet',
-    href: '#',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-related-product-01.jpg',
-    imageAlt: 'Front of Billfold Wallet in natural leather.',
-    price: '$118',
-    color: 'Natural',
+    name: "Billfold Wallet",
+    href: "#",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-related-product-01.jpg",
+    imageAlt: "Front of Billfold Wallet in natural leather.",
+    price: "$118",
+    color: "Natural",
   },
   // More products...
-]
+];
 const footerNavigation = {
   products: [
-    { name: 'Bags', href: '#' },
-    { name: 'Tees', href: '#' },
-    { name: 'Objects', href: '#' },
-    { name: 'Home Goods', href: '#' },
-    { name: 'Accessories', href: '#' },
+    { name: "Bags", href: "#" },
+    { name: "Tees", href: "#" },
+    { name: "Objects", href: "#" },
+    { name: "Home Goods", href: "#" },
+    { name: "Accessories", href: "#" },
   ],
   company: [
-    { name: 'Who we are', href: '#' },
-    { name: 'Sustainability', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Careers', href: '#' },
-    { name: 'Terms & Conditions', href: '#' },
-    { name: 'Privacy', href: '#' },
+    { name: "Who we are", href: "#" },
+    { name: "Sustainability", href: "#" },
+    { name: "Press", href: "#" },
+    { name: "Careers", href: "#" },
+    { name: "Terms & Conditions", href: "#" },
+    { name: "Privacy", href: "#" },
   ],
   customerService: [
-    { name: 'Contact', href: '#' },
-    { name: 'Shipping', href: '#' },
-    { name: 'Returns', href: '#' },
-    { name: 'Warranty', href: '#' },
-    { name: 'Secure Payments', href: '#' },
-    { name: 'FAQ', href: '#' },
-    { name: 'Find a store', href: '#' },
+    { name: "Contact", href: "#" },
+    { name: "Shipping", href: "#" },
+    { name: "Returns", href: "#" },
+    { name: "Warranty", href: "#" },
+    { name: "Secure Payments", href: "#" },
+    { name: "FAQ", href: "#" },
+    { name: "Find a store", href: "#" },
   ],
-}
+};
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="bg-white">
       {/* Mobile menu */}
 
-
-      <header className="relative bg-white">
-
-      </header>
+      <header className="relative bg-white"></header>
 
       <main className="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Shopping Cart</h1>
+        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Shopping Cart
+        </h1>
 
         <form className="mt-12 lg:grid lg:grid-cols-12 lg:gap-x-12 lg:items-start xl:gap-x-16">
           <section aria-labelledby="cart-heading" className="lg:col-span-7">
@@ -225,7 +245,10 @@ export default function Example() {
               Items in your shopping cart
             </h2>
 
-            <ul role="list" className="border-t border-b border-gray-200 divide-y divide-gray-200">
+            <ul
+              role="list"
+              className="border-t border-b border-gray-200 divide-y divide-gray-200"
+            >
               {products.map((product, productIdx) => (
                 <li key={product.id} className="flex py-6 sm:py-10">
                   <div className="flex-shrink-0">
@@ -241,7 +264,10 @@ export default function Example() {
                       <div>
                         <div className="flex justify-between">
                           <h3 className="text-sm">
-                            <a href={product.href} className="font-medium text-gray-700 hover:text-gray-800">
+                            <a
+                              href={product.href}
+                              className="font-medium text-gray-700 hover:text-gray-800"
+                            >
                               {product.name}
                             </a>
                           </h3>
@@ -249,14 +275,21 @@ export default function Example() {
                         <div className="mt-1 flex text-sm">
                           <p className="text-gray-500">{product.color}</p>
                           {product.size ? (
-                            <p className="ml-4 pl-4 border-l border-gray-200 text-gray-500">{product.size}</p>
+                            <p className="ml-4 pl-4 border-l border-gray-200 text-gray-500">
+                              {product.size}
+                            </p>
                           ) : null}
                         </div>
-                        <p className="mt-1 text-sm font-medium text-gray-900">{product.price}</p>
+                        <p className="mt-1 text-sm font-medium text-gray-900">
+                          {product.price}
+                        </p>
                       </div>
 
                       <div className="mt-4 sm:mt-0 sm:pr-9">
-                        <label htmlFor={`quantity-${productIdx}`} className="sr-only">
+                        <label
+                          htmlFor={`quantity-${productIdx}`}
+                          className="sr-only"
+                        >
                           Quantity, {product.name}
                         </label>
                         <select
@@ -275,9 +308,15 @@ export default function Example() {
                         </select>
 
                         <div className="absolute top-0 right-0">
-                          <button type="button" className="-m-2 p-2 inline-flex text-gray-400 hover:text-gray-500">
+                          <button
+                            type="button"
+                            className="-m-2 p-2 inline-flex text-gray-400 hover:text-gray-500"
+                          >
                             <span className="sr-only">Remove</span>
-                            <XIconSolid className="h-5 w-5" aria-hidden="true" />
+                            <XIconSolid
+                              className="h-5 w-5"
+                              aria-hidden="true"
+                            />
                           </button>
                         </div>
                       </div>
@@ -285,12 +324,22 @@ export default function Example() {
 
                     <p className="mt-4 flex text-sm text-gray-700 space-x-2">
                       {product.inStock ? (
-                        <CheckIcon className="flex-shrink-0 h-5 w-5 text-green-500" aria-hidden="true" />
+                        <CheckIcon
+                          className="flex-shrink-0 h-5 w-5 text-green-500"
+                          aria-hidden="true"
+                        />
                       ) : (
-                        <ClockIcon className="flex-shrink-0 h-5 w-5 text-gray-300" aria-hidden="true" />
+                        <ClockIcon
+                          className="flex-shrink-0 h-5 w-5 text-gray-300"
+                          aria-hidden="true"
+                        />
                       )}
 
-                      <span>{product.inStock ? 'In stock' : `Ships in ${product.leadTime}`}</span>
+                      <span>
+                        {product.inStock
+                          ? "In stock"
+                          : `Ships in ${product.leadTime}`}
+                      </span>
                     </p>
                   </div>
                 </li>
@@ -303,7 +352,10 @@ export default function Example() {
             aria-labelledby="summary-heading"
             className="mt-16 bg-gray-50 rounded-lg px-4 py-6 sm:p-6 lg:p-8 lg:mt-0 lg:col-span-5"
           >
-            <h2 id="summary-heading" className="text-lg font-medium text-gray-900">
+            <h2
+              id="summary-heading"
+              className="text-lg font-medium text-gray-900"
+            >
               Order summary
             </h2>
 
@@ -315,9 +367,17 @@ export default function Example() {
               <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
                 <dt className="flex items-center text-sm text-gray-600">
                   <span>Shipping estimate</span>
-                  <a href="#" className="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500">
-                    <span className="sr-only">Learn more about how shipping is calculated</span>
-                    <QuestionMarkCircleIcon className="h-5 w-5" aria-hidden="true" />
+                  <a
+                    href="#"
+                    className="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500"
+                  >
+                    <span className="sr-only">
+                      Learn more about how shipping is calculated
+                    </span>
+                    <QuestionMarkCircleIcon
+                      className="h-5 w-5"
+                      aria-hidden="true"
+                    />
                   </a>
                 </dt>
                 <dd className="text-sm font-medium text-gray-900">$5.00</dd>
@@ -325,36 +385,48 @@ export default function Example() {
               <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
                 <dt className="flex text-sm text-gray-600">
                   <span>Tax estimate</span>
-                  <a href="#" className="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500">
-                    <span className="sr-only">Learn more about how tax is calculated</span>
-                    <QuestionMarkCircleIcon className="h-5 w-5" aria-hidden="true" />
+                  <a
+                    href="#"
+                    className="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500"
+                  >
+                    <span className="sr-only">
+                      Learn more about how tax is calculated
+                    </span>
+                    <QuestionMarkCircleIcon
+                      className="h-5 w-5"
+                      aria-hidden="true"
+                    />
                   </a>
                 </dt>
                 <dd className="text-sm font-medium text-gray-900">$8.32</dd>
               </div>
               <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
-                <dt className="text-base font-medium text-gray-900">Order total</dt>
+                <dt className="text-base font-medium text-gray-900">
+                  Order total
+                </dt>
                 <dd className="text-base font-medium text-gray-900">$112.32</dd>
               </div>
             </dl>
 
             <div className="mt-6">
-                <Link to="/orders/checkout">
+              <Link to="/orders/checkout">
                 <button
-                type="submit"
-                className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-              >
-                Checkout
-              </button>
-                </Link>
-             
+                  type="submit"
+                  className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                >
+                  Checkout
+                </button>
+              </Link>
             </div>
           </section>
         </form>
 
         {/* Related products */}
         <section aria-labelledby="related-heading" className="mt-24">
-          <h2 id="related-heading" className="text-lg font-medium text-gray-900">
+          <h2
+            id="related-heading"
+            className="text-lg font-medium text-gray-900"
+          >
             You may also like&hellip;
           </h2>
 
@@ -376,19 +448,21 @@ export default function Example() {
                         {relatedProduct.name}
                       </a>
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500">{relatedProduct.color}</p>
+                    <p className="mt-1 text-sm text-gray-500">
+                      {relatedProduct.color}
+                    </p>
                   </div>
-                  <p className="text-sm font-medium text-gray-900">{relatedProduct.price}</p>
+                  <p className="text-sm font-medium text-gray-900">
+                    {relatedProduct.price}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </section>
       </main>
-
-
     </div>
-  )
+  );
 }
 
-export const cart = 3
+export const cart = 3;

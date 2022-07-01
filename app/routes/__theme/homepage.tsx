@@ -29,7 +29,7 @@ export default function Homepage() {
       {/* Mobile menu */}
 
       {/* Hero section */}
-      <div className="relative bg-orange-700">
+      <div className="relative bg-sky-700">
         {/* Decorative image and overlay */}
         <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
           <img
@@ -40,7 +40,7 @@ export default function Homepage() {
         </div>
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-orange-600 to-orange-100  opacity-20"
+          className="absolute inset-0"
         />
 
         {/* Navigation */}
@@ -50,13 +50,13 @@ export default function Homepage() {
           <h1 className="text-4xl font-extrabold tracking-tight text-white lg:text-6xl drop-shadow-2xl shadow-zinc-500">
             New arrivals are here
           </h1>
-          <p className="mt-4 text-xl bg-orange-400 text-white drop-shadow-xl shadow-black rounded-full px-8 py-1">
+          <p className="mt-4 text-xl bg-white text-sky-900 drop-shadow-xl shadow-black rounded-full px-8 py-1">
             The new arrivals have, well, newly arrived. <br />
             Check out the latest options from our products page.
           </p>
         </div>
       </div>
-      <footer aria-labelledby="footer-heading" className="bg-orange-900">
+      <footer aria-labelledby="footer-heading" className="bg-sky-900">
         <h2 id="footer-heading" className="sr-only">
           Footer
         </h2>
@@ -149,7 +149,7 @@ export default function Homepage() {
                 <div className="ml-4 flex-shrink-0">
                   <button
                     type="submit"
-                    className="w-full bg-orange-600 border border-transparent rounded-md shadow-sm py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-orange-500"
+                    className="w-full bg-sky-600 border border-transparent rounded-md shadow-sm py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-sky-500"
                   >
                     Sign up
                   </button>

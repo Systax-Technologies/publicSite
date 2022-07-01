@@ -29,3 +29,4 @@ Cart
 ![image](https://user-images.githubusercontent.com/75695917/176617303-c8249f00-7c98-44a1-9963-7a8df529e8a8.png)
 
 Checkout
+

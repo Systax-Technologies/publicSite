@@ -81,14 +81,6 @@ export function Layout() {
 
                   {/* Mobile menu and search (lg-) */}
                   <div className="flex-1 flex items-center lg:hidden">
-                    <button
-                      type="button"
-                      className="-ml-2 p-2 text-white"
-                      onClick={() => setMobileMenuOpen(true)}
-                    >
-                      <span className="sr-only">Open menu</span>
-                      <MenuIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
 
                     {/* Search */}
                     <a href="#" className="ml-2 p-2 text-white">

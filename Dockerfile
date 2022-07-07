@@ -2,11 +2,9 @@
 
 FROM node:alpine
 
-WORKDIR /home/ecommerce
+WORKDIR /app
 
-COPY package.json ./
-
-COPY . .
+COPY . /app/
 
 EXPOSE 3000
 

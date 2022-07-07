@@ -12,7 +12,7 @@ import {
   ListableProduct,
   Product,
 } from "../../../helpers/type-helper.server";
-import { getSiteCookie } from "../../../helpers/cookies"
+
 import { Cart, CartElement } from "../../../helpers/type-helper.server"
 
 type LoaderData = {
@@ -93,8 +93,7 @@ export default function GetProductDetailById() {
     cartElements: [],
     totalPrice: 0
   }
-  cart.cartElements.push(cartElement)
-  let cookie = getSiteCookie(cart)
+
 
 
 

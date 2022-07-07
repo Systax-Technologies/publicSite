@@ -12,6 +12,8 @@ import {
   ListableProduct,
   Product,
 } from "../../../helpers/type-helper.server";
+import { getSiteCookie } from "../../../helpers/cookies"
+import { Cart, CartElement } from "../../../helpers/type-helper.server"
 
 type LoaderData = {
   listableProductDetail: ListableProductDetail;
@@ -72,11 +74,29 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+function addToCart(cart: Cart, cartElement: CartElement){
+  cart.cartElements.push(cartElement)
+  cart.totalPrice += cartElement.price
+}
+
 export default function GetProductDetailById() {
   
   const product =   useLoaderData<LoaderData>().listableProductDetail
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+  let cartElement: CartElement ={
+    id: "cuidhere",
+    quantity: 3,
+    price: 45.66
+  }
+  let cart: Cart = {
+    cartElements: [],
+    totalPrice: 0
+  }
+  cart.cartElements.push(cartElement)
+  let cookie = getSiteCookie(cart)
+
+
 
   return (
     <div className="bg-white">

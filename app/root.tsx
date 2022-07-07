@@ -1,4 +1,5 @@
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import { CookiesProvider } from "react-cookie"
 import {
   Links,
   LiveReload,
@@ -27,7 +28,9 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full">
+        <CookiesProvider>
         <Outlet />
+        </CookiesProvider>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === "development" && <LiveReload />}

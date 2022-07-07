@@ -101,3 +101,15 @@ export function listableProductDetailConverter(product: ListableProduct) {
     ],
   };
 }
+
+
+export type CartElement = {
+  id: string;
+  quantity: number;
+  price: number;
+}
+
+export type Cart = {
+  cartElements : CartElement[];
+  totalPrice : number;
+}

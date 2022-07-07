@@ -1,44 +1,13 @@
 import { ZoomInIcon } from "@heroicons/react/outline";
 import { LoaderFunction } from "@remix-run/node";
 import { useLoaderData, Link } from "@remix-run/react";
+import { listableProductConverter, Product, ListableProduct } from "../../helpers/type-helper.server"
 import { z } from "zod";
 
 type LoaderData = {
   listableProductList: ListableProduct[];
 };
 
-type ListableProduct = {
-  id: string;
-  imgUrl: string;
-  imgAlt: string;
-  description: string;
-  model: string;
-  color: string;
-  price: number;
-};
-
-type Product = {
-  id: string;
-  model: string;
-  imageUrl: string;
-  description: string;
-  color: string;
-  size: string;
-  price: number;
-  createdAt: string;
-};
-
-export function listableProductConverter(product: Product) {
-  return {
-    id: product.id,
-    imgUrl: product.imageUrl,
-    imgAlt: product.description,
-    description: product.description,
-    model: product.model,
-    color: product.color,
-    price: product.price,
-  };
-}
 export const loader: LoaderFunction = async ({}): Promise<LoaderData> => {
   const listableProductList: ListableProduct[] = [];
 
@@ -62,6 +31,7 @@ export const loader: LoaderFunction = async ({}): Promise<LoaderData> => {
         size: z.string(),
         price: z.number(),
         createdAt: z.string(),
+        updatedAt: z.string(),
       })
       .array(),
   });

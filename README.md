@@ -20,13 +20,13 @@ front-end: Remix, Reactjs, Tailwind
 ## Screenshots
 Homepage
 ![image](https://user-images.githubusercontent.com/75695917/176617221-c6ffb9f2-7943-4ff1-ba21-40fbcac2e0cc.png)
-![image](https://user-images.githubusercontent.com/75695917/176617221-c6ffb9f2-7943-4ff1-ba21-40fbcac2e0cc.png)
+
 
 Products list
 
 Cart
 ![image](https://user-images.githubusercontent.com/75695917/176617303-c8249f00-7c98-44a1-9963-7a8df529e8a8.png)
-![image](https://user-images.githubusercontent.com/75695917/176617303-c8249f00-7c98-44a1-9963-7a8df529e8a8.png)
+
 
 Checkout
 

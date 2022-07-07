@@ -21,7 +21,7 @@ export function Layout() {
       <header className="relative z-10">
         <nav aria-label="Top">
           {/* Top navigation */}
-          <div className="bg-orange-900">
+          <div className=" bg-sky-900">
             <div className="max-w-7xl mx-auto h-10 px-4 flex items-center justify-between sm:px-6 lg:px-8">
               <div className="w-screen flex items-center space-x-6 h-16 justify-between">
                 <div className="hidden lg:flex-1 lg:flex lg:items-center ">
@@ -81,15 +81,6 @@ export function Layout() {
 
                   {/* Mobile menu and search (lg-) */}
                   <div className="flex-1 flex items-center lg:hidden">
-                    <button
-                      type="button"
-                      className="-ml-2 p-2 text-white"
-                      onClick={() => setMobileMenuOpen(true)}
-                    >
-                      <span className="sr-only">Open menu</span>
-                      <MenuIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-
                     {/* Search */}
                     <a href="#" className="ml-2 p-2 text-white">
                       <span className="sr-only">Search</span>

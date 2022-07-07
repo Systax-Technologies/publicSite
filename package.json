@@ -16,8 +16,10 @@
     "@remix-run/react": "^1.6.0",
     "@remix-run/serve": "^1.6.0",
     "react": "^18.2.0",
+    "react-cookie": "^4.1.1",
+    "react-dom": "^18.2.0",
     "remix": "^1.6.0",
-    "react-dom": "^18.2.0"
+    "zod": "^3.17.3"
   },
   "devDependencies": {
     "@headlessui/react": "^1.6.4",

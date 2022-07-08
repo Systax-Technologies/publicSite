@@ -2,11 +2,13 @@ import { ActionFunction, redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import React from "react";
 import { hashPassword } from "~/helpers/crypto.server";
+import { getSession, commitSession } from "../helpers/session.server";
 
 export const action: ActionFunction = async ({ request }) => {
   const formBody = await request.formData();
 
   if (formBody.get("signin") === "login") {
+    const session = await getSession();
     const email = formBody.get("email");
     const password = formBody.get("password");
 
@@ -31,13 +33,24 @@ export const action: ActionFunction = async ({ request }) => {
       {
         method: "post",
         body,
+        headers: {
+          authorization: `Bearer ${session.get("jwt")}`,
+        },
       }
     );
 
     if (response.ok) {
       const responseBody = await response.json();
 
-      throw redirect("/homepage");
+      session.set("jwt", responseBody.accessToken);
+
+      throw redirect("/homepage", {
+        headers: {
+          "Set-Cookie": await commitSession(session),
+        },
+      });
+    } else {
+      throw new Error("nON VA");
     }
   } else {
     const email = formBody.get("email");
@@ -68,6 +81,7 @@ export const action: ActionFunction = async ({ request }) => {
 
     if (response.ok) {
       const responseBody = await response.json();
+      return redirect("/signin");
     }
   }
 };

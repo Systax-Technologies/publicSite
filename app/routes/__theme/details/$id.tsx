@@ -2,8 +2,8 @@ import { useState } from "react";
 import { StarIcon } from "@heroicons/react/solid";
 import { RadioGroup } from "@headlessui/react";
 import { CurrencyDollarIcon, GlobeIcon } from "@heroicons/react/outline";
-import { LoaderFunction, Response } from "@remix-run/node";
-import { useLoaderData, Link } from "@remix-run/react";
+import { json, LoaderFunction, Response } from "@remix-run/node";
+import { useLoaderData, Link, Form } from "@remix-run/react";
 import { z } from "zod";
 import {
   listableProductDetailConverter,
@@ -13,17 +13,18 @@ import {
   Product,
 } from "../../../helpers/type-helper.server";
 
-import { Cart, CartElement } from "../../../helpers/type-helper.server"
+import { Cart, CartElement } from "../../../helpers/type-helper.server";
+
+import { ActionFunction, redirect } from "@remix-run/node";
+import { cart } from "../orders/cart";
+import { commitSession, getSession } from "~/helpers/session.server";
 
 type LoaderData = {
   listableProductDetail: ListableProductDetail;
 };
 
-export const loader: LoaderFunction = async ({
-  params,
-}): Promise<LoaderData> => {
+export const loader: LoaderFunction = async ({ params, request }) => {
   const id = params.id;
-
   if (id) {
     const response = await fetch(
       `http://127.0.0.1:3001/api/v1/warehouse/products/${id}`,
@@ -48,13 +49,36 @@ export const loader: LoaderFunction = async ({
 
     console.log(responseBody);
     const product = schema.parse(responseBody);
-    let listProduct = listableProductConverter(product);
-    return { listableProductDetail: listableProductDetailConverter(listProduct) };
+    const listProduct: ListableProduct = listableProductConverter(product);
+    const listableProductDetail = listableProductDetailConverter(listProduct);
+
+    return json<LoaderData>({ listableProductDetail });
+    // return { listableProductDetail : listableProductDetailConverter(listProduct)} ;
   }
   throw new Response(null, {
     status: 400,
     statusText: "Bad Request",
   });
+};
+
+export const action: ActionFunction = async ({ request, params }) => {
+  const formBody = await request.formData();
+
+  const productId = params.id;
+
+  const color = formBody.get("color");
+  const size = formBody.get("size");
+  const price = formBody.get("price");
+
+  if (color == null || typeof color !== "string") {
+    return null;
+  }
+
+  if (price == null || typeof price !== "number") {
+    return null;
+  }
+
+  throw redirect("/cart", cart);
 };
 
 const policies = [
@@ -70,32 +94,14 @@ const policies = [
   },
 ];
 
-function classNames(...classes) {
+function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-function addToCart(cart: Cart, cartElement: CartElement){
-  cart.cartElements.push(cartElement)
-  cart.totalPrice += cartElement.price
-}
-
 export default function GetProductDetailById() {
-  
-  const product =   useLoaderData<LoaderData>().listableProductDetail
+  const product = useLoaderData<LoaderData>().listableProductDetail;
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
-  let cartElement: CartElement ={
-    id: "cuidhere",
-    quantity: 3,
-    price: 45.66
-  }
-  let cart: Cart = {
-    cartElements: [],
-    totalPrice: 0
-  }
-
-
-
 
   return (
     <div className="bg-white">
@@ -150,7 +156,7 @@ export default function GetProductDetailById() {
                     {product.listableProduct.description}
                   </h1>
                   <p className="text-xl font-medium text-gray-900">
-                   € {product.listableProduct.price}
+                    € {product.listableProduct.price}
                   </p>
                 </div>
                 {/* Reviews */}
@@ -209,15 +215,16 @@ export default function GetProductDetailById() {
               </div>
 
               <div className="mt-8 lg:col-span-5">
-                <form>
+                <Form className="" action="#" method="post">
                   {/* Color picker */}
                   <div>
                     <h2 className="text-sm font-medium text-gray-900">Color</h2>
-
+                    <input hidden={true} name="price" value={product.listableProduct.price}/>
                     <RadioGroup
                       value={selectedColor}
                       onChange={setSelectedColor}
                       className="mt-2"
+                      name="color"
                     >
                       <RadioGroup.Label className="sr-only">
                         Choose a color
@@ -268,6 +275,7 @@ export default function GetProductDetailById() {
 
                     <RadioGroup
                       value={selectedSize}
+                      name="size"
                       onChange={setSelectedSize}
                       className="mt-2"
                     >
@@ -310,7 +318,7 @@ export default function GetProductDetailById() {
                   >
                     Add to cart
                   </button>
-                </form>
+                </Form>
 
                 {/* Product details */}
                 <div className="mt-10">

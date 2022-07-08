@@ -102,14 +102,12 @@ export function listableProductDetailConverter(product: ListableProduct) {
   };
 }
 
-
 export type CartElement = {
   id: string;
   quantity: number;
+  size: string;
+  color: string;
   price: number;
-}
+};
 
-export type Cart = {
-  cartElements : CartElement[];
-  totalPrice : number;
-}
+export type Cart = CartElement[];

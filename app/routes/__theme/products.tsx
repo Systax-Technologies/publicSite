@@ -1,14 +1,19 @@
 import { ZoomInIcon } from "@heroicons/react/outline";
-import { LoaderFunction } from "@remix-run/node";
+import { json, LoaderFunction } from "@remix-run/node";
 import { useLoaderData, Link } from "@remix-run/react";
-import { listableProductConverter, Product, ListableProduct } from "../../helpers/type-helper.server"
+import {
+  listableProductConverter,
+  Product,
+  ListableProduct,
+} from "../../helpers/type-helper.server";
 import { z } from "zod";
+import { commitSession, getSession } from "~/helpers/session.server";
 
 type LoaderData = {
   listableProductList: ListableProduct[];
 };
 
-export const loader: LoaderFunction = async ({}): Promise<LoaderData> => {
+export const loader: LoaderFunction = async ({ request }) => {
   const listableProductList: ListableProduct[] = [];
 
   const response = await fetch(
@@ -42,7 +47,11 @@ export const loader: LoaderFunction = async ({}): Promise<LoaderData> => {
     listableProductList.push(listableProductConverter(product));
   });
 
-  return { listableProductList: listableProductList };
+  return json<LoaderData>({ listableProductList });
+  // return { listableProductList: listableProductList , headers: {
+  //   // only necessary with cookieSessionStorage
+  //   "Set-Cookie": await commitSession(session),
+  // }, };
 };
 
 type ElaboratedDataProps = {

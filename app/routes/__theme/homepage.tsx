@@ -9,6 +9,23 @@ import { Link } from "@remix-run/react";
 import serenuplogo from "public/assets/seren-up-logo.png";
 import bracelets from "public/assets/bracelets.jpg";
 import { Fragment, useState } from "react";
+import { LoaderFunction, redirect } from "@remix-run/node";
+import { commitSession, getSession } from "~/helpers/session.server";
+import { Cookies } from "react-cookie";
+
+// export const loader: LoaderFunction = async ({ request }) => {
+//   const session = await getSession(request.headers.get("Cookie"))
+//   const accessToken = session.get("jwt")
+//   if (accessToken == null || typeof accessToken !== "string") {
+//     return redirect("/signin")
+//   }
+
+//   return new Response(null, {
+//     headers: {
+//       "Set-Cookie" : await commitSession(session)
+//     }
+//   });
+// };
 
 const footerNavigation = {
   shop: [{ name: "Bracelets", href: "/products" }],
@@ -38,10 +55,7 @@ export default function Homepage() {
             className="w-full h-full object-center object-cover"
           />
         </div>
-        <div
-          aria-hidden="true"
-          className="absolute inset-0"
-        />
+        <div aria-hidden="true" className="absolute inset-0" />
 
         {/* Navigation */}
         <header className="relative z-10"></header>

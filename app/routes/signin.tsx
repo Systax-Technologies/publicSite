@@ -2,11 +2,13 @@ import { ActionFunction, redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import React from "react";
 import { hashPassword } from "~/helpers/crypto.server";
+import { getSession, commitSession } from "../helpers/session.server";
 
 export const action: ActionFunction = async ({ request }) => {
   const formBody = await request.formData();
 
   if (formBody.get("signin") === "login") {
+    const session = await getSession();
     const email = formBody.get("email");
     const password = formBody.get("password");
 
@@ -23,21 +25,32 @@ export const action: ActionFunction = async ({ request }) => {
 
     const body = JSON.stringify({
       email,
-      password: hashPassword(password),
+      password: password,
     });
 
     const response = await fetch(
-      "http://127.0.0.1:3001/api/v1/ecommerce/login",
+      "http://192.168.103.136:3000/api/v1/ecommerce/customers/login",
       {
         method: "post",
         body,
+        headers: {
+          authorization: `Bearer ${session.get("jwt")}`,
+        },
       }
     );
 
     if (response.ok) {
       const responseBody = await response.json();
 
-      throw redirect("/homepage");
+      session.set("jwt", responseBody.accessToken);
+
+      throw redirect("/homepage", {
+        headers: {
+          "Set-Cookie": await commitSession(session),
+        },
+      });
+    } else {
+      throw new Error("nON VA");
     }
   } else {
     const email = formBody.get("email");
@@ -61,13 +74,14 @@ export const action: ActionFunction = async ({ request }) => {
       password: hashPassword(password),
     });
 
-    const response = await fetch("/api/v1/ecommerce/login", {
+    const response = await fetch("/api/v1/ecommerce/customers/login", {
       method: "post",
       body,
     });
 
     if (response.ok) {
       const responseBody = await response.json();
+      return redirect("/signin");
     }
   }
 };

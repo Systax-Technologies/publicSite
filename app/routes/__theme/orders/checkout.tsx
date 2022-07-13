@@ -50,18 +50,6 @@ export default function Example() {
         ```
       */}
       <main className="lg:min-h-full lg:overflow-hidden lg:flex lg:flex-row-reverse">
-        <div className="px-4 py-6 sm:px-6 lg:hidden">
-          <div className="max-w-lg mx-auto flex">
-            <a href="#">
-              <span className="sr-only">Workflow</span>
-              <img
-                src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                alt=""
-                className="h-8 w-auto"
-              />
-            </a>
-          </div>
-        </div>
 
         <h1 className="sr-only">Checkout</h1>
 

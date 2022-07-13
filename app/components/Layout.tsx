@@ -7,7 +7,7 @@ import {
   ShoppingBagIcon,
   XIcon,
 } from "@heroicons/react/outline";
-import { Link } from "@remix-run/react";
+import { Link, Links } from "@remix-run/react";
 import serenuplogo from "public/assets/seren-up-logo.png";
 import { Outlet } from "@remix-run/react";
 
@@ -15,7 +15,11 @@ const navigation = {
   pages: [{ name: "Products", href: "/products" }],
 };
 
-export function Layout() {
+type LayoutProps = {
+  isSigned: boolean;
+};
+
+export function Layout({ isSigned }: LayoutProps) {
   return (
     <>
       <header className="relative z-10">
@@ -34,13 +38,13 @@ export function Layout() {
                     <Popover.Group className="px-4 bottom-0 inset-x-0">
                       <div className="h-full flex justify-center space-x-8">
                         {navigation.pages.map((page) => (
-                          <a
+                          <Link
                             key={page.name}
-                            href={page.href}
+                            to={page.href}
                             className="flex items-center text-sm font-medium text-white"
                           >
                             {page.name}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </Popover.Group>
@@ -63,10 +67,10 @@ export function Layout() {
                   </Link>
                 </div>
                 <Link
-                  to="/signin"
+                  to={isSigned ? "/signout" : "/signin"}
                   className="text-sm font-medium text-white hover:text-gray-100"
                 >
-                  Sign In
+                  {isSigned ? "Sign Out" : "Sign In"}
                 </Link>
               </div>
             </div>

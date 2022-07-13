@@ -3,13 +3,11 @@ import { boolean, string } from "zod";
 export type Product = {
   id: string;
   model: string;
-  imageUrl: string;
+  imageUrl: string[];
   description: string;
   color: string;
   size: string;
   price: number;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type ListableProduct = {
@@ -25,7 +23,7 @@ export type ListableProduct = {
 export function listableProductConverter(product: Product) {
   return {
     id: product.id,
-    imgUrl: product.imageUrl,
+    imgUrl: product.imageUrl[0],
     imgAlt: product.description,
     description: product.description,
     model: product.model,
@@ -61,7 +59,7 @@ export type ListableProductDetail = {
 export function listableProductDetailConverter(product: ListableProduct) {
   return {
     listableProduct: {
-      id: product.id,
+      id: product.description,
       imgUrl: product.imgUrl,
       imgAlt: product.imgAlt,
       description: product.description,
@@ -102,14 +100,12 @@ export function listableProductDetailConverter(product: ListableProduct) {
   };
 }
 
-
 export type CartElement = {
   id: string;
   quantity: number;
+  size: string;
+  color: string;
   price: number;
-}
+};
 
-export type Cart = {
-  cartElements : CartElement[];
-  totalPrice : number;
-}
+export type Cart = CartElement[];

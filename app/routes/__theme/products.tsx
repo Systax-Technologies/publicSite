@@ -1,18 +1,23 @@
 import { ZoomInIcon } from "@heroicons/react/outline";
-import { LoaderFunction } from "@remix-run/node";
+import { json, LoaderFunction } from "@remix-run/node";
 import { useLoaderData, Link } from "@remix-run/react";
-import { listableProductConverter, Product, ListableProduct } from "../../helpers/type-helper.server"
+import {
+  listableProductConverter,
+  Product,
+  ListableProduct,
+} from "../../helpers/type-helper.server";
 import { z } from "zod";
+import { commitSession, getSession } from "~/helpers/session.server";
 
 type LoaderData = {
   listableProductList: ListableProduct[];
 };
 
-export const loader: LoaderFunction = async ({}): Promise<LoaderData> => {
+export const loader: LoaderFunction = async ({ request }) => {
   const listableProductList: ListableProduct[] = [];
 
   const response = await fetch(
-    "http://127.0.0.1:3001/api/v1/warehouse/products",
+    "http://192.168.103.136:3000/api/v1/ecommerce/products",
     {
       method: "get",
     }
@@ -25,13 +30,11 @@ export const loader: LoaderFunction = async ({}): Promise<LoaderData> => {
       .object({
         id: z.string(),
         model: z.string(),
-        imageUrl: z.string(),
+        imageUrl: z.string().array(),
         description: z.string(),
         color: z.string(),
         size: z.string(),
         price: z.number(),
-        createdAt: z.string(),
-        updatedAt: z.string(),
       })
       .array(),
   });
@@ -42,7 +45,11 @@ export const loader: LoaderFunction = async ({}): Promise<LoaderData> => {
     listableProductList.push(listableProductConverter(product));
   });
 
-  return { listableProductList: listableProductList };
+  return json<LoaderData>({ listableProductList });
+  // return { listableProductList: listableProductList , headers: {
+  //   // only necessary with cookieSessionStorage
+  //   "Set-Cookie": await commitSession(session),
+  // }, };
 };
 
 type ElaboratedDataProps = {

@@ -25,11 +25,11 @@ export const action: ActionFunction = async ({ request }) => {
 
     const body = JSON.stringify({
       email,
-      password: hashPassword(password),
+      password: password,
     });
 
     const response = await fetch(
-      "http://127.0.0.1:3001/api/v1/ecommerce/login",
+      "http://192.168.103.136:3000/api/v1/ecommerce/customers/login",
       {
         method: "post",
         body,
@@ -74,7 +74,7 @@ export const action: ActionFunction = async ({ request }) => {
       password: hashPassword(password),
     });
 
-    const response = await fetch("/api/v1/ecommerce/login", {
+    const response = await fetch("/api/v1/ecommerce/customers/login", {
       method: "post",
       body,
     });

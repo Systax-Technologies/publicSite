@@ -27,7 +27,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   const id = params.id;
   if (id) {
     const response = await fetch(
-      `http://127.0.0.1:3001/api/v1/warehouse/products/${id}`,
+      `http://192.168.103.136:3000/api/v1/ecommerce/products/${id}`,
       {
         method: "get",
       }
@@ -38,13 +38,11 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     const schema = z.object({
       id: z.string(),
       model: z.string(),
-      imageUrl: z.string(),
+      imageUrl: z.string().array(),
       description: z.string(),
       color: z.string(),
       size: z.string(),
       price: z.number(),
-      createdAt: z.string(),
-      updatedAt: z.string(),
     });
 
     console.log(responseBody);
@@ -203,7 +201,7 @@ export default function GetProductDetailById() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 lg:gap-8">
                   <img
-                    key={product.listableProduct.id}
+                    key={product.listableProduct.description}
                     src={product.listableProduct.imgUrl}
                     alt={product.listableProduct.imgUrl}
                     className={classNames(

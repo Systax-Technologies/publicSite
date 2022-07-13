@@ -17,7 +17,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   const listableProductList: ListableProduct[] = [];
 
   const response = await fetch(
-    "http://127.0.0.1:3001/api/v1/warehouse/products",
+    "http://192.168.103.136:3000/api/v1/ecommerce/products",
     {
       method: "get",
     }
@@ -30,13 +30,11 @@ export const loader: LoaderFunction = async ({ request }) => {
       .object({
         id: z.string(),
         model: z.string(),
-        imageUrl: z.string(),
+        imageUrl: z.string().array(),
         description: z.string(),
         color: z.string(),
         size: z.string(),
         price: z.number(),
-        createdAt: z.string(),
-        updatedAt: z.string(),
       })
       .array(),
   });

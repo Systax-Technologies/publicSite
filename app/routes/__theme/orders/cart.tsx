@@ -17,52 +17,31 @@ import { Link } from "@remix-run/react";
 const products = [
   {
     id: 1,
-    name: "Basic Tee",
+    name: "SerenBand3",
     href: "#",
-    price: "$32.00",
-    color: "Sienna",
+    price: 75.00,
+    color: "Yellow",
     inStock: true,
     size: "Large",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in sienna.",
+      "https://www.homecleaner.it/474-large_default/braccialetto-sostitutivo-per-xiaomi-mi-band-5-giallo.jpg",
+    imageAlt: "SerenBand3",
   },
   {
     id: 2,
-    name: "Basic Tee",
+    name: "SerenBand2",
     href: "#",
-    price: "$32.00",
+    price: 150.00,
     color: "Black",
-    inStock: false,
-    leadTime: "3–4 weeks",
+    inStock: true,
     size: "Large",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-02.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-  },
-  {
-    id: 3,
-    name: "Nomad Tumbler",
-    href: "#",
-    price: "$35.00",
-    color: "White",
-    inStock: true,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-03.jpg",
-    imageAlt: "Insulated bottle with white base and black snap lid.",
-  },
+      "https://i01.appmifile.com/v1/MI_18455B3E4DA706226CF7535A58E875F0267/pms_1655208027.90914413.png",
+    imageAlt: "SerenBand3",
+  }
 ];
 const relatedProducts = [
-  {
-    id: 1,
-    name: "Billfold Wallet",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-related-product-01.jpg",
-    imageAlt: "Front of Billfold Wallet in natural leather.",
-    price: "$118",
-    color: "Natural",
-  },
+
   // More products...
 ];
 const footerNavigation = {
@@ -92,9 +71,6 @@ const footerNavigation = {
   ],
 };
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function Example() {
   const [open, setOpen] = useState(false);
@@ -206,11 +182,7 @@ export default function Example() {
                         />
                       )}
 
-                      <span>
-                        {product.inStock
-                          ? "In stock"
-                          : `Ships in ${product.leadTime}`}
-                      </span>
+                     
                     </p>
                   </div>
                 </li>
@@ -233,7 +205,7 @@ export default function Example() {
             <dl className="mt-6 space-y-4">
               <div className="flex items-center justify-between">
                 <dt className="text-sm text-gray-600">Subtotal</dt>
-                <dd className="text-sm font-medium text-gray-900">$99.00</dd>
+                <dd className="text-sm font-medium text-gray-900">€ {Math.round(products[0].price + products[1].price).toFixed(2)}</dd>
               </div>
               <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
                 <dt className="flex items-center text-sm text-gray-600">
@@ -251,7 +223,7 @@ export default function Example() {
                     />
                   </a>
                 </dt>
-                <dd className="text-sm font-medium text-gray-900">$5.00</dd>
+                <dd className="text-sm font-medium text-gray-900">€5.00</dd>
               </div>
               <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
                 <dt className="flex text-sm text-gray-600">
@@ -269,13 +241,13 @@ export default function Example() {
                     />
                   </a>
                 </dt>
-                <dd className="text-sm font-medium text-gray-900">$8.32</dd>
+                <dd className="text-sm font-medium text-gray-900">€8.32</dd>
               </div>
               <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
                 <dt className="text-base font-medium text-gray-900">
                   Order total
                 </dt>
-                <dd className="text-base font-medium text-gray-900">$112.32</dd>
+                <dd className="text-base font-medium text-gray-900">€ {Math.round(8.32 + 5.00 + products[0].price + products[1].price).toFixed(2)}</dd>
               </div>
             </dl>
 
@@ -294,42 +266,9 @@ export default function Example() {
 
         {/* Related products */}
         <section aria-labelledby="related-heading" className="mt-24">
-          <h2
-            id="related-heading"
-            className="text-lg font-medium text-gray-900"
-          >
-            You may also like&hellip;
-          </h2>
 
-          <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {relatedProducts.map((relatedProduct) => (
-              <div key={relatedProduct.id} className="group relative">
-                <div className="w-full min-h-80 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                  <img
-                    src={relatedProduct.imageSrc}
-                    alt={relatedProduct.imageAlt}
-                    className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-                  />
-                </div>
-                <div className="mt-4 flex justify-between">
-                  <div>
-                    <h3 className="text-sm text-gray-700">
-                      <a href={relatedProduct.href}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {relatedProduct.name}
-                      </a>
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-500">
-                      {relatedProduct.color}
-                    </p>
-                  </div>
-                  <p className="text-sm font-medium text-gray-900">
-                    {relatedProduct.price}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+
+
         </section>
       </main>
     </div>
